@@ -9,12 +9,14 @@ import { MongooseModule } from '@nestjs/mongoose';
 
 // Modules
 import { ProductsModule } from './products/products.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot(),
-    ProductsModule,
     MongooseModule.forRoot(process.env.MONGO_URI),
+    ProductsModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],
