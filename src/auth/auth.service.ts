@@ -5,6 +5,7 @@ import { Model } from 'mongoose';
 
 import { CreateUserDto } from './dto/create-user.dto';
 import { SignInDto } from './dto/sign-in.dto';
+import { UpdateUserDto } from './dto/update-user.dto';
 import { User, UserDocument } from './schemas/user.schema';
 
 @Injectable()
@@ -22,5 +23,10 @@ export class AuthService {
         const newUser: UserDocument = new this.userModel(createUserDto);
 
         return newUser.save();
+    }
+
+    public async update(_id: string, updateUserDto: UpdateUserDto) {
+        return await this.userModel
+            .findByIdAndUpdate(_id, updateUserDto, { new: true });
     }
 }
