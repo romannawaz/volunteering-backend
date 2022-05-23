@@ -1,8 +1,9 @@
-import { Body, Controller, Param, Post, Put } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Put } from '@nestjs/common';
 import { AuthService } from './auth.service';
 
 import { CreateUserDto } from './dto/create-user.dto';
 import { SignInDto } from './dto/sign-in.dto';
+import { TokenData } from './dto/token-data.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { UserDocument } from './schemas/user.schema';
 
@@ -13,11 +14,22 @@ export class AuthController {
         private authService: AuthService,
     ) { }
 
+    @Get('/user/:id')
+    public async getUser(
+        @Param()
+        { id }: { id: string }
+    ): Promise<{ password: string }> {
+        const user: UserDocument = await this.authService.getUserById(id);
+        const { password } = user;
+
+        return { password: password };
+    }
+
     @Post('/sign-in')
     public signIn(
         @Body()
         signInDto: SignInDto,
-    ) {
+    ): Promise<TokenData> {
         return this.authService.signIn(signInDto);
     }
 
@@ -25,7 +37,7 @@ export class AuthController {
     public createUser(
         @Body()
         createUserDto: CreateUserDto,
-    ): Promise<UserDocument> {
+    ): TokenData {
         return this.authService.create(createUserDto);
     }
 
@@ -35,7 +47,7 @@ export class AuthController {
         { _id }: { _id: string },
         @Body()
         updateUserDto: UpdateUserDto,
-    ) {
+    ): Promise<TokenData> {
         return this.authService.update(_id, updateUserDto);
     }
 } 
