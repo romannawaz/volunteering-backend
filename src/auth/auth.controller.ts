@@ -15,7 +15,15 @@ export class AuthController {
     ) { }
 
     @Get('/user/:id')
-    public async getUser(
+    public async getUserById(
+        @Param()
+        { id }: { id: string }
+    ): Promise<{ password: string }> {
+        return await this.authService.getUserById(id);
+    }
+
+    @Get('/user/password/:id')
+    public async getUserPasswordById(
         @Param()
         { id }: { id: string }
     ): Promise<{ password: string }> {
