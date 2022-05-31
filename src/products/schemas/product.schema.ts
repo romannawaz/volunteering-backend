@@ -1,6 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
-import { ProductUsersData } from '../dto/create-product.dto';
 
 export type ProductDocument = Product & Document;
 
@@ -16,7 +15,7 @@ export class Product {
   price: number;
 
   @Prop()
-  user_info: ProductUsersData;
+  user_id: string;
 }
 
 export const ProductSchema = SchemaFactory.createForClass(Product);
