@@ -19,6 +19,10 @@ export class ProductsService {
         return await this.productModel.findById(id);
     }
 
+    public async getProductsByUserId(user_id: string): Promise<Product[]> {
+        return await this.productModel.find({ user_id }).exec();
+    }
+
     public async create(productDto: CreateProductDto): Promise<Product> {
         const newProduct: ProductDocument = new this.productModel(productDto);
 
