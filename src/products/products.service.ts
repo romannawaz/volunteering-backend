@@ -28,4 +28,12 @@ export class ProductsService {
 
         return newProduct.save();
     }
+
+    public async update(id: string, productDto: CreateProductDto): Promise<Product> {
+        return await this.productModel.findByIdAndUpdate(id, productDto);
+    }
+
+    public async delete(id: string): Promise<Product> {
+        return await this.productModel.findByIdAndDelete(id);
+    }
 }
