@@ -49,6 +49,16 @@ export class AuthController {
         return this.authService.create(createUserDto);
     }
 
+    @Post('/contacts/:user_id')
+    public addContacts(
+        @Param('user_id')
+        user_id: string,
+        @Body()
+        contacts: string[]
+    ): Promise<TokenData> {
+        return this.authService.addContacts(user_id, contacts);
+    }
+
     @Put('/update/:_id')
     public updateUser(
         @Param()

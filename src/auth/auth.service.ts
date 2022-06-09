@@ -45,6 +45,12 @@ export class AuthService {
         return this._generateToken(updatedUser);
     }
 
+    public async addContacts(user_id: string, contacts: string[]): Promise<TokenData> {
+        const updatedUser: UserDocument = await this.userModel.findByIdAndUpdate(user_id, contacts);
+
+        return this._generateToken(updatedUser);
+    }
+
     private _generateToken(user: UserDocument): TokenData {
         const { password, ...payload } = user;
 
