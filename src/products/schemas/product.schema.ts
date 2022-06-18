@@ -12,7 +12,16 @@ export class Product {
   description: string;
 
   @Prop()
-  price: number;
+  amount: number;
+
+  @Prop()
+  collected: number;
+
+  @Prop()
+  region: string;
+
+  @Prop()
+  date: Date;
 
   @Prop()
   user_id: string;
