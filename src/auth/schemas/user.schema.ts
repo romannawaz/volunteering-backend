@@ -18,7 +18,10 @@ export class User {
     password: string;
 
     @Prop()
-    contacts: string[];
+    phone: number;
+
+    @Prop()
+    cardNumber: number;
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);
